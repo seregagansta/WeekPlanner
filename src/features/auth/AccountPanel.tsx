@@ -65,7 +65,9 @@ export function AccountPanel({ onClose }: { onClose(): void }) {
               setBusy(true)
               const { error } = await supabase!.auth.signInWithOtp({
                 email,
-                options: { emailRedirectTo: window.location.origin },
+                options: {
+                  emailRedirectTo: new URL(import.meta.env.BASE_URL, window.location.origin).href,
+                },
               })
               setBusy(false)
               if (error) reportError(error)

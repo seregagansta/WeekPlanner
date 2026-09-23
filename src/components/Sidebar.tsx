@@ -23,7 +23,7 @@ export function Sidebar({
   const { categories, cloud, session, updateCategory, reportError, online } = usePlanner()
   return (
     <aside className="sidebar">
-      <a className="brand" href="/" aria-label="WeekPlanner — главная">
+      <a className="brand" href={import.meta.env.BASE_URL} aria-label="WeekPlanner — главная">
         <span className="brand-icon">
           <CalendarDays size={21} />
         </span>
