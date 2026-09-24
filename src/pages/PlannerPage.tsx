@@ -281,7 +281,7 @@ export function PlannerPage() {
             <h2>Ваша неделя ждёт вас</h2>
             <p>Войдите, чтобы открыть задачи и синхронизировать устройства.</p>
             <button className="primary" onClick={() => setPanel('account')}>
-              Войти по email
+              Войти в аккаунт
             </button>
           </div>
         ) : (

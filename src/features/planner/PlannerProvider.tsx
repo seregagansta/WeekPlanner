@@ -5,6 +5,7 @@ import { supabase, supabaseConfigurationError } from '../../lib/supabase'
 import { createLocalRepository } from '../../services/localRepository'
 import { createSupabaseRepository } from '../../services/supabaseRepository'
 import { createPlannerActions } from '../../services/plannerActions'
+import { getAuthErrorMessage, restoreAuthSession } from '../../services/authService'
 import { PlannerContext } from './PlannerContext'
 import type { ConnectionState, PlannerSnapshot } from '../../types/planner'
 
@@ -39,12 +40,18 @@ export function PlannerProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!supabase) return
     let active = true
-    void supabase.auth.getSession().then(({ data, error: authError }) => {
-      if (!active) return
-      if (authError) reportError(authError)
-      setSession(data.session)
-      setAuthReady(true)
-    })
+    void restoreAuthSession(supabase)
+      .then(({ session: current, error: authError }) => {
+        if (!active) return
+        if (authError) reportError(authError)
+        setSession(current)
+      })
+      .catch((cause: unknown) => {
+        if (active) reportError(getAuthErrorMessage(cause))
+      })
+      .finally(() => {
+        if (active) setAuthReady(true)
+      })
     const { data } = supabase.auth.onAuthStateChange((_event, current) => {
       if (active) {
         setSession(current)

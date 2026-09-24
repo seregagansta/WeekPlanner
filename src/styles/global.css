@@ -1551,3 +1551,26 @@ h1 {
     font-size: 22px;
   }
 }
+
+.google-sign-in {
+  min-height: 44px;
+  justify-content: center;
+}
+.google-sign-in svg {
+  flex-shrink: 0;
+}
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+}

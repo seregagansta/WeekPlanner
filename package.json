@@ -11,6 +11,7 @@
     "test": "vitest run",
     "typecheck": "tsc -b",
     "test:e2e": "playwright test",
+    "test:auth": "playwright test --config playwright.auth.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

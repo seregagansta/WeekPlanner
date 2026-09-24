@@ -1,0 +1,2 @@
+# Development tool only. SQL parser includes the Supabase schema in the local code graph.
+graphifyy[sql]==0.9.67
